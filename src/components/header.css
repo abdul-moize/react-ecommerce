@@ -11,33 +11,7 @@ background: #dadada;
     padding: 0px;
     background: transparent;
 }
-.bubble {
-  margin-top: 80px;
-  right: 160px;
-  position: absolute;
-  font-family: sans-serif;
-  font-size: 18px;
-  line-height: 24px;
-  width: 300px;
-  background: dodgerblue;
-  border-radius: 40px;
-  padding: 24px;
-  text-align: center;
-  border: 0px;
-  color: white;
-}
-.bubble-top-right:before {
-  content: "";
-  width: 0px;
-  height: 0px;
-  position: absolute;
-  border-left: 20px solid transparent;
-  border-right: 20px solid dodgerblue;
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid dodgerblue;
-  right: 40px;
-  top: -40px;
-}
+
 .header {
 overflow: hidden;
 background-color: #f1f1f1;
