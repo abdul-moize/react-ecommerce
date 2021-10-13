@@ -1,0 +1,19 @@
+.product-box{
+  list-style: none;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 10px;
+  margin: 30px;
+  width: 250px;
+}
+.price{
+  color: green;
+  text-decoration-line: none;
+  font-weight: 400;
+}
+.name{
+  color: black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
