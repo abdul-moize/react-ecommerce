@@ -69,29 +69,6 @@
   border-radius: 20px;
   padding: 20px
 }
-.bubble{
-background: linear-gradient(to right, #ff105f, #ffad06);
-position: relative;
-font-size: 18px;
-line-height: 24px;
-width: 300px;
-border-radius: 40px;
-padding: 24px;
-text-align: center;
-color: #000;
-}
-.bubble-bottom-left:before {
-content: "";
-width: 0px;
-height: 0px;
-position: relative;
-border-left: 24px solid #ff105f;
-border-right: 12px solid transparent;
-border-top: 12px solid #ff105f;
-border-bottom: 20px solid transparent;
-left: 32px;
-bottom: -24px;
-}
 .error{
   color: red;
   font-size: small;
