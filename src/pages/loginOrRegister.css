@@ -1,27 +1,30 @@
-.hero{
+.hero {
   height: 100%;
   width: 100%;
-  background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4));
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
   background-position: center;
   background-size: cover;
   position: absolute;
 }
-.form-box{
+
+.form-box {
   width: 380px;
-  height: 55%;
+  height: 400px;
   position: relative;
   margin: 6% auto;
   background: #fff;
   padding: 5px;
 }
-.button-box{
+
+.button-box {
   width: 220px;
   margin: 35px auto;
   position: relative;
   box-shadow: 0 0 20px 9px #ff61241f;
   border-radius: 30px;
 }
-.toggle-btn{
+
+.toggle-btn {
   padding: 10px 30px;
   cursor: pointer;
   background: transparent;
@@ -29,7 +32,8 @@
   outline: none;
   position: relative;
 }
-#btn{
+
+.btn {
   top: 0;
   left: 0;
   position: absolute;
@@ -37,16 +41,26 @@
   height: 100%;
   background: linear-gradient(to right, #ff105f, #ffad06);
   border-radius: 30px;
-  transition: .5s;
+  transition: 0.5s;
 }
-.input-group{
-  top: 180px;
-  position: absolute;
+
+.active-login {
+  left: 0px;
+}
+
+.active-register {
+  left: 110px;
+}
+
+.input-group {
+  position: relative;
+  left: 50px;
   width: 280px;
-  transition: .5s;
+  transition: 0.5s;
 }
-.input-field{
-  width:100%;
+
+.input-field {
+  width: 100%;
   padding: 10px 0;
   margin: 5px 0;
   outline: none;
@@ -54,7 +68,8 @@
   border-left: 0;
   background: transparent;
 }
-.submit-btn{
+
+.submit-btn {
   width: 85%;
   padding: 10px 30px;
   cursor: pointer;
@@ -64,18 +79,14 @@
   outline: none;
   border-radius: 30px;
 }
-.message{
+
+.message {
   background: linear-gradient(to right, #ff105f, #ffad06);
   border-radius: 20px;
-  padding: 20px
+  padding: 20px;
 }
-.error{
+
+.error {
   color: red;
   font-size: small;
-}
-#login-form{
-  left: 50px;
-}
-#register-form{
-  left: 50px;
 }

@@ -5,10 +5,11 @@ function EmailField(props) {
       name="email"
       className="input-field"
       placeholder="Enter Email"
-      required value={props.email}
+      required
+      value={props.email}
       onChange={props.onChange}
     />
-  )
+  );
 }
 function NameField() {
   return (
@@ -19,7 +20,7 @@ function NameField() {
       placeholder="Enter Name"
       required
     />
-  )
+  );
 }
 function PasswordField(props) {
   return (
@@ -32,20 +33,25 @@ function PasswordField(props) {
       value={props.password}
       onChange={props.onChange}
     />
-  )
+  );
 }
 function SubmitButton(props) {
   return (
-    <button type="button" className="submit-btn" onClick={props.onClick}>
+    <button
+      type={props.onClick ? "button" : "submit"}
+      className="submit-btn"
+      onClick={props.onClick}
+    >
       {props.text}
     </button>
-  )
+  );
 }
 function ErrorField(props) {
   return (
     <li className="error" style={props.style}>
       {props.text}
     </li>
-  )
+  );
 }
-export { NameField, EmailField, PasswordField, SubmitButton, ErrorField }
+
+export { NameField, EmailField, PasswordField, SubmitButton, ErrorField };

@@ -1,48 +1,45 @@
-import { useState } from "react/cjs/react.development";
-import { registerAPI } from "./constants";
-import { EmailField, NameField, PasswordField, SubmitButton, ErrorField } from "./elements"
+import { useRef, useState } from "react";
+import { registerService } from "../services/userService";
+import {
+  EmailField,
+  NameField,
+  PasswordField,
+  SubmitButton,
+  ErrorField,
+} from "./elements";
 
 function RegisterForm(props) {
-  const [nameError, setNameError] = useState()
-  const [emailError, setEmailError] = useState()
+  const [nameError, setNameError] = useState();
+  const [emailError, setEmailError] = useState();
   const [passwordError, setPasswordError] = useState();
+  const formRef = useRef();
   const register = () => {
-    let form = new FormData(document.getElementById("register-form"))
-    fetch(registerAPI, {
-      method: 'POST',
-      body: form
-    })
-      .then(response => response.json())
-      .then(data => {
-        setNameError("")
-        setEmailError("")
-        setPasswordError([])
-        if (data["status_code"] === 201) {
-          props.changePage("Account created. Please log in")
-        }
-        else {
-          let errors = data["message"]
-          if ("name" in errors)
-            setNameError(errors["name"])
-          if ("email" in errors)
-            setEmailError(errors["email"])
-          if ("password" in errors)
-            setPasswordError(errors["password"])
-
-        }
-      });
-  }
+    let form = new FormData(formRef.current);
+    registerService(form).then((data) => {
+      setNameError("");
+      setEmailError("");
+      setPasswordError([]);
+      if (data["status_code"] === 201) {
+        props.changePage("Account created. Please log in");
+      } else {
+        let errors = data["message"];
+        if ("name" in errors) setNameError(errors["name"]);
+        if ("email" in errors) setEmailError(errors["email"]);
+        if ("password" in errors) setPasswordError(errors["password"]);
+      }
+    });
+  };
   return (
-    <form id="register-form" className="input-group">
+    <form className="input-group" ref={formRef}>
       <NameField />
-      {nameError ? <ErrorField text={nameError} /> : null}
+      {nameError && <ErrorField text={nameError} />}
       <EmailField />
-      {emailError ? <ErrorField text={emailError} /> : null}
+      {emailError && <ErrorField text={emailError} />}
       <PasswordField />
-      {passwordError ? passwordError.map(v => <ErrorField text={v} />) : null}
+      {passwordError && passwordError.map((v) => <ErrorField text={v} />)}
       <SubmitButton text="Register" onClick={register} />
     </form>
-  )
+  );
 }
 
-export { RegisterForm }
+export { RegisterForm };

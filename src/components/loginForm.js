@@ -1,41 +1,43 @@
+import { useRef, useState } from "react";
 import { useHistory } from "react-router";
-import { homepage, loginAPI } from "./constants";
-import { EmailField, PasswordField, SubmitButton } from "./elements"
+import { loginService } from "../services/userService";
+import { HOMEPAGE } from "./constants";
+import {
+  EmailField,
+  ErrorField,
+  PasswordField,
+  SubmitButton,
+} from "./elements";
 
 function LoginForm(props) {
   const history = useHistory();
-  const login = () => {
-    let form = new FormData(document.getElementById("login-form"))
-    fetch(loginAPI, {
-      method: 'POST',
-      body: form
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data["status_code"] === 200) {
-          localStorage.setItem("token", data["token"])
-          localStorage.setItem("role", data["role"])
-          props.setLoggedIn(true)
-          history.replace(homepage)
-        }
-        else {
-          alert(data["message"])
-        }
-
-
-      }).catch(reason => {
-        alert("there was an error in logging in" + reason.toString())
+  const formRef = useRef();
+  const [errorMessage, setErrorMessage] = useState("");
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    let form = new FormData(formRef.current);
+    loginService(form)
+      .then((data) => {
+        props.setLoggedIn(true);
+        history.replace(HOMEPAGE);
+      })
+      .catch((error) => {
+        setErrorMessage(error);
       });
-
-
-  }
+  };
   return (
-    <form id="login-form" className="input-group">
+    <form
+      id="login-form"
+      className="input-group"
+      onSubmit={onSubmitHandler}
+      ref={formRef}
+    >
+      {errorMessage && <ErrorField text={errorMessage} />}
       <EmailField />
       <PasswordField />
-      <SubmitButton text="Login" onClick={login} />
+      <SubmitButton text="Login" />
     </form>
-  )
+  );
 }
 
-export { LoginForm }
+export { LoginForm };

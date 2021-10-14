@@ -1,16 +1,15 @@
-import { useHistory } from "react-router"
-import { useEffect } from "react/cjs/react.development"
-import { auth } from "../components/constants"
+import { useHistory } from "react-router";
+import { useEffect } from "react";
+import { AUTH } from "../components/constants";
+import { logout } from "../services/userService";
 
 function LogOut(props) {
-  localStorage.removeItem("token")
-  localStorage.removeItem("role")
-  const history = useHistory()
+  const history = useHistory();
   useEffect(() => {
-    history.replace(auth)
-    props.setLoggedIn(false)
-  }, [history, props])
-
-  return (<div></div>)
+    logout();
+    history.replace(AUTH);
+    props.setLoggedIn(false);
+  }, [history, props]);
+  return <></>;
 }
-export default LogOut
+export default LogOut;
