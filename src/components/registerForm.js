@@ -15,19 +15,21 @@ function RegisterForm(props) {
   const formRef = useRef();
   const register = () => {
     let form = new FormData(formRef.current);
-    registerService(form).then((data) => {
-      setNameError("");
-      setEmailError("");
-      setPasswordError([]);
-      if (data["status_code"] === 201) {
+    registerService(form)
+      .then((data) => {
+        setNameError("");
+        setEmailError("");
+        setPasswordError([]);
         props.changePage("Account created. Please log in");
-      } else {
-        let errors = data["message"];
+      })
+      .catch((errors) => {
+        setNameError("");
+        setEmailError("");
+        setPasswordError([]);
         if ("name" in errors) setNameError(errors["name"]);
         if ("email" in errors) setEmailError(errors["email"]);
         if ("password" in errors) setPasswordError(errors["password"]);
-      }
-    });
+      });
   };
   return (
     <form className="input-group" ref={formRef}>

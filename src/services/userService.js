@@ -27,7 +27,18 @@ export const registerService = (form) => {
   return fetch(REGISTER_API, {
     method: "POST",
     body: form,
-  }).then((response) => response.json());
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (data["status_code"] === 201) {
+        return data;
+      }
+      throw data;
+    })
+    .catch((error) => {
+      throw error.message;
+    });
 };
 
 export const logout = () => {
