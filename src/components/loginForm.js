@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { loginService } from "../services/userService";
-import { HOMEPAGE } from "./constants";
+import { HOMEPAGE } from "../constants";
 import {
   EmailField,
   ErrorField,
@@ -15,8 +15,9 @@ function LoginForm(props) {
   const [errorMessage, setErrorMessage] = useState("");
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    let form = new FormData(formRef.current);
-    loginService(form)
+    let formData = new FormData(formRef.current);
+
+    loginService(formData)
       .then((data) => {
         props.setLoggedIn(true);
         history.replace(HOMEPAGE);
@@ -25,13 +26,9 @@ function LoginForm(props) {
         setErrorMessage(error);
       });
   };
+
   return (
-    <form
-      id="login-form"
-      className="input-group"
-      onSubmit={onSubmitHandler}
-      ref={formRef}
-    >
+    <form className="input-group" onSubmit={onSubmitHandler} ref={formRef}>
       {errorMessage && <ErrorField text={errorMessage} />}
       <EmailField />
       <PasswordField />

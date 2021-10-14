@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { HOMEPAGE } from "../constants";
+import { HOMEPAGE } from "../../constants";
 import { NavLinks } from "../navLinks";
 import "./header.css";
 

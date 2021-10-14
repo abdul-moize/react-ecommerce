@@ -13,24 +13,25 @@ function RegisterForm(props) {
   const [emailError, setEmailError] = useState();
   const [passwordError, setPasswordError] = useState();
   const formRef = useRef();
+
   const register = () => {
-    let form = new FormData(formRef.current);
-    registerService(form)
+    let formData = new FormData(formRef.current);
+
+    registerService(formData)
       .then((data) => {
         setNameError("");
         setEmailError("");
         setPasswordError([]);
-        props.changePage("Account created. Please log in");
+        props.setMessage("Account created. Please log in");
+        props.changePage();
       })
       .catch((errors) => {
-        setNameError("");
-        setEmailError("");
-        setPasswordError([]);
-        if ("name" in errors) setNameError(errors["name"]);
-        if ("email" in errors) setEmailError(errors["email"]);
-        if ("password" in errors) setPasswordError(errors["password"]);
+        setNameError("name" in errors ? errors["name"] : "");
+        setEmailError("email" in errors ? errors["email"] : "");
+        setPasswordError("password" in errors ? errors["password"] : []);
       });
   };
+
   return (
     <form className="input-group" ref={formRef}>
       <NameField />

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { AUTH } from "../constants";
+import { AUTH } from "../../constants";
 import "./navLinks.css";
-import { isContentManager } from "../utils";
+import { isContentManager } from "../../utils";
 
 export function NavLinks(props) {
   return (

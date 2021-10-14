@@ -1,13 +1,11 @@
-import { LOGIN_API, REGISTER_API } from "../components/constants";
-
 function AuthenticationException(message) {
   this.message = message;
 }
 
-export const loginService = (form) => {
-  return fetch(LOGIN_API, {
+export const loginService = (loginCredential) => {
+  return fetch(process.env.REACT_APP_LOGIN_API, {
     method: "POST",
-    body: form,
+    body: loginCredential,
   })
     .then((response) => response.json())
     .then((data) => {
@@ -23,10 +21,10 @@ export const loginService = (form) => {
     });
 };
 
-export const registerService = (form) => {
-  return fetch(REGISTER_API, {
+export const registerService = (userData) => {
+  return fetch(process.env.REACT_APP_REGISTER_API, {
     method: "POST",
-    body: form,
+    body: userData,
   })
     .then((response) => response.json())
     .then((data) => {

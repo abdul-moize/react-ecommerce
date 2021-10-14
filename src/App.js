@@ -2,14 +2,16 @@ import { Route, Switch } from "react-router";
 import { useState } from "react";
 //import { AddProduct } from './components/addProduct';
 //import CartDetail from './components/cartDetail';
-import { AUTH, HOMEPAGE } from "./components/constants";
+import { AUTH, HOMEPAGE } from "./constants";
 import Header from "./components/header";
 //import Homepage from './components/homepage';
 import LoginOrRegister from "./pages/loginOrRegister";
 import LogOut from "./pages/logout";
 //import ProductDetail from './components/productDetail';
+require("dotenv").config();
 
 function App() {
+  console.log(process.env);
   const [isLoggedIn, setLoggedIn] = useState(localStorage.getItem("token"));
   return (
     <div>

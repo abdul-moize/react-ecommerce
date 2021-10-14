@@ -11,6 +11,7 @@ function EmailField(props) {
     />
   );
 }
+
 function NameField() {
   return (
     <input
@@ -22,6 +23,7 @@ function NameField() {
     />
   );
 }
+
 function PasswordField(props) {
   return (
     <input
@@ -35,6 +37,7 @@ function PasswordField(props) {
     />
   );
 }
+
 function SubmitButton(props) {
   return (
     <button
@@ -46,6 +49,7 @@ function SubmitButton(props) {
     </button>
   );
 }
+
 function ErrorField(props) {
   return (
     <li className="error" style={props.style}>

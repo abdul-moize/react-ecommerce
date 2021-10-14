@@ -7,17 +7,14 @@ function LoginOrRegister(props) {
   const [activeForm, setActiveForm] = useState("login");
   const [message, setMessage] = useState("");
 
-  let showLoginForm = (m = "") => {
+  let showLoginForm = () => {
     setActiveForm("login");
-    if (typeof m === "string") setMessage(m);
   };
 
   let showRegisterForm = () => {
     setActiveForm("register");
     setMessage("");
   };
-  const loginForm = <LoginForm setLoggedIn={props.setLoggedIn} />;
-  const registerForm = <RegisterForm changePage={showLoginForm} />;
 
   return (
     <div className="hero" style={{ background: "url(/background_banner.jpg)" }}>
@@ -36,7 +33,11 @@ function LoginOrRegister(props) {
           </button>
         </div>
         {message && <div className="message">{message}</div>}
-        {activeForm === "login" ? loginForm : registerForm}
+        {activeForm === "login" ? (
+          <LoginForm setLoggedIn={props.setLoggedIn} />
+        ) : (
+          <RegisterForm changePage={showLoginForm} setMessage={setMessage} />
+        )}
       </div>
     </div>
   );
