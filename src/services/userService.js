@@ -30,7 +30,6 @@ export const registerService = (userData) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       if (data["status_code"] === 201) {
         return data;
       }
