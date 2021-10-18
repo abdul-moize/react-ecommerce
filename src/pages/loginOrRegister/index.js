@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { LoginForm } from "../../components/loginForm";
+import { RegisterForm } from "../../components/registerForm";
 import "./loginOrRegister.css";
-import { LoginForm } from "../components/loginForm";
-import { RegisterForm } from "../components/registerForm";
 
 function LoginOrRegister(props) {
   const [activeForm, setActiveForm] = useState("login");

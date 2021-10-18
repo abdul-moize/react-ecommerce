@@ -4,14 +4,13 @@ import { useState } from "react";
 //import CartDetail from './components/cartDetail';
 import { AUTH, HOMEPAGE } from "./constants";
 import Header from "./components/header";
-//import Homepage from './components/homepage';
+import Homepage from "./pages/homepage";
 import LoginOrRegister from "./pages/loginOrRegister";
 import LogOut from "./pages/logout";
 //import ProductDetail from './components/productDetail';
 require("dotenv").config();
 
 function App() {
-  console.log(process.env);
   const [isLoggedIn, setLoggedIn] = useState(localStorage.getItem("token"));
   return (
     <div>
@@ -20,9 +19,9 @@ function App() {
         <Route path={AUTH} exact>
           <LoginOrRegister setLoggedIn={setLoggedIn} />
         </Route>
-        {/* <Route path={HOMEPAGE} exact>
+        <Route path={HOMEPAGE} exact>
           <Homepage />
-        </Route> */}
+        </Route>
         <Route path="/orders"></Route>
 
         {/* <Route path="/cart">
