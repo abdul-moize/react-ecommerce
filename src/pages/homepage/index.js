@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { ErrorField } from "../../components/elements";
 import getProducts from "../../services/productService";
-import ProductRow from "../../components/productRow";
 import "./homepage.css";
+import RowItem from "../../components/rowItem";
 
 function Homepage() {
   const [data, setData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   useEffect(() => {
     getProducts()
-      .then((newData) => setData(newData))
+      .then((newData) => {
+        console.log(newData);
+        setData(newData);
+      })
       .catch((errorMsg) => {
-        console.log(errorMsg);
         setErrorMessage(errorMsg);
       });
   }, []);
@@ -21,7 +23,7 @@ function Homepage() {
       <div className="products-container">
         {data !== null ? (
           data.map((element, index) => {
-            return <ProductRow elements={element} key={`row_${index}`} />;
+            return <RowItem item={element} key={`row_${index}`} />;
           })
         ) : (
           <ErrorField text={errorMessage} />

@@ -7,23 +7,10 @@ function NoProductsException(message) {
 export default function getProducts() {
   return fetch(PRODUCT_API)
     .then((res) => {
-      console.log(res);
       if (res.status === 200) return res.json();
       throw new NoProductsException("No products found");
     })
-    .then((products) => {
-      const newData = [];
-      let row = [];
-
-      for (let i = 0; i < products.length; i++) {
-        row.push(products[i]);
-        if ((i + 1) % 5 === 0 || i === products.length - 1) {
-          newData.push(row);
-          row = [];
-        }
-      }
-      return newData;
-    })
+    .then((products) => products)
     .catch((error) => {
       throw error.message;
     });

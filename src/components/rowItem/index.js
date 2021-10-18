@@ -8,8 +8,7 @@ function RowItem(props) {
     <Link to={`${HOMEPAGE}${item.id}`} className="product-box">
       <img
         src={item.image || "/product_image.png"}
-        width="250"
-        height="250"
+        className="product-image"
         alt={item.name}
       />
       <div className="name">{item.name.toUpperCase()}</div>
