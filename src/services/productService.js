@@ -10,7 +10,6 @@ export default function getProducts() {
       if (res.status === 200) return res.json();
       throw new NoProductsException("No products found");
     })
-    .then((products) => products)
     .catch((error) => {
       throw error.message;
     });
