@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ErrorField } from "../../components/elements";
-import getProducts from "../../services/productService";
+import { getProducts } from "../../services/productService";
 import "./homepage.css";
 import ProductCard from "../../components/productCard";
 
