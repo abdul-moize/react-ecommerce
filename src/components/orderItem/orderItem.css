@@ -1,0 +1,32 @@
+.order-item{
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-cart-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+
+.order-product-image{
+  height: 200px;
+  width: 200px;
+}
+
+.order-product-name{
+  margin: 20px;
+  font-size: 25px;
+  font-weight: 100;
+  width: 30%;
+}
+
+.order-product-quantity{
+  margin: 10px;
+  font-size: 25px;
+  width: 70px;
+  text-align: center;
+}

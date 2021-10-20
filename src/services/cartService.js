@@ -12,6 +12,10 @@ function NoCartItemsException(message) {
   this.message = message;
 }
 
+function NoOrdersException(message) {
+  this.message = message;
+}
+
 export function getCartItems() {
   return fetch(CART_API, {
     headers: {
@@ -85,4 +89,20 @@ export function addToCart(formData) {
 
 export function checkoutCart(formData) {
   return updateCart(formData, "True");
+}
+
+export function getOrders() {
+  return fetch(CART_API, {
+    headers: {
+      Authorization: `Token ${localStorage.getItem("token")}`,
+    },
+  })
+    .then((res) => {
+      if (res.status === 200) return res.json();
+      throw new NoOrdersException("Please submit an order first");
+    })
+    .then((data) => data["orders"])
+    .catch((exception) => {
+      throw exception.message;
+    });
 }
