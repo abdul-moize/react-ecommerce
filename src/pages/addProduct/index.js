@@ -1,6 +1,5 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { useEffect } from "react/cjs/react.development";
 import { ErrorField } from "../../components/elements";
 import { HOMEPAGE } from "../../constants";
 import { addProduct } from "../../services/productService";
@@ -15,7 +14,7 @@ export function AddProduct() {
     if (!isContentManager()) {
       history.replace(HOMEPAGE);
     }
-  });
+  }, [history]);
   function submitForm(event) {
     event.preventDefault();
     const productData = new FormData(formRef.current);

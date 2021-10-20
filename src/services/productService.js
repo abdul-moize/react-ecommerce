@@ -33,8 +33,12 @@ export function addProduct(productData) {
 }
 
 export function getProduct(id) {
-  return fetch(`${PRODUCT_API}${id}`).then((res) => {
-    if (res.status === 200) return res.json();
-    throw new DoesNotExistException("Product does not exist");
-  });
+  return fetch(`${PRODUCT_API}${id}`)
+    .then((res) => {
+      if (res.status === 200) return res.json();
+      throw new DoesNotExistException("Product does not exist");
+    })
+    .catch((exception) => {
+      throw exception.message;
+    });
 }
