@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
+  text-align: center;
 }
 
 .product-container {
@@ -14,7 +14,6 @@
   flex-direction: row;
   width: 100%;
   height: 100%;
-
 }
 
 .image-container {
@@ -24,28 +23,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 .product-detail-image {
   width: 100%;
   height: 100%;
-
 }
 
 .product-details {
   display: flex;
   flex-direction: column;
-
+  text-align: left;
   width: 50%;
-
 }
 
 .name-field {
   font-size: 25px;
   font-weight: 500;
   margin: 10px;
-
 }
 
 .description-field {
@@ -58,10 +53,9 @@
   color: green;
   font-size: 25px;
   margin: 10px;
-
 }
 
-.add-to-cart {
+.add-to-cart-btn {
   background: #f57224;
   border: 0;
   color: white;
@@ -69,7 +63,6 @@
   font-size: 25px;
   height: 40px;
   margin: 10px;
-
 }
 
 .value-field {
@@ -77,11 +70,4 @@
   font-size: 25px;
   width: 80px;
   height: 40px;
-
-}
-.title-field{
-  font-size: 40px;
-  margin-bottom: 80px;
-  text-align: center;
-
 }

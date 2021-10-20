@@ -39,9 +39,7 @@ function App() {
           path={`${HOMEPAGE}:product_id(\\d+)`}
           exact
           render={({ match, props, location }) => (
-            <div>
-              <ProductDetail id={match.params.product_id} />
-            </div>
+            <ProductDetail id={match.params.product_id} />
           )}
         />
       </Switch>

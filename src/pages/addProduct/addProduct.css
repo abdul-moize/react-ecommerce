@@ -1,4 +1,4 @@
-.form-container{
+.product-form-container{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,17 +6,6 @@
   height: 680px;
   margin: 10px auto;
   flex-direction: column;
-}
-
-.form-box{
-  display: flex;
-  background: transparent;
-  flex-direction: column;
-  width: 100%;
-  height: 600px;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
 }
 
 .product-form{
@@ -46,7 +35,7 @@
   min-width: 280px;
 }
 
-.button{
+.product-form-btn{
   width: 250px;
   padding: 10px;
   cursor: pointer;
@@ -57,25 +46,7 @@
   border-radius: 30px;
 }
 
-.message{
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(to right, #ff105f, #ffad06);
-  width : 400px;
-  height: 50px;
-  font-size: 25px;
-}
-
-.labels{
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  width: 100%;
-}
-
-.form-row{
+.product-form-row{
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -85,20 +56,8 @@
   width:100%;
 }
 
-.field-name{
-  margin-right: 15px;
+.product-form-field-name{
   text-align: left;
-  width: 30%;
-}
-
-.error{
-  color: red;
-  padding: 5px;
-}
-
-.title-field{
-  font-size: 40px;
-  margin-bottom: 80px;
-  text-align: center;
-
+  width: 20%;
+  margin-bottom: 10px;
 }

@@ -19,13 +19,13 @@ export function getProducts() {
     });
 }
 
-export function addProduct(formData) {
+export function addProduct(productData) {
   return fetch(PRODUCT_API, {
     method: "POST",
     headers: {
       Authorization: `Token ${localStorage.getItem("token")}`,
     },
-    body: formData,
+    body: productData,
   }).then((res) => {
     if (res.status === 201) return res.json();
     throw res.json();

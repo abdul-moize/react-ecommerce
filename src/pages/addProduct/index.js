@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useHistory } from "react-router";
+import { useEffect } from "react/cjs/react.development";
 import { ErrorField } from "../../components/elements";
 import { HOMEPAGE } from "../../constants";
 import { addProduct } from "../../services/productService";
@@ -10,13 +11,15 @@ export function AddProduct() {
   const history = useHistory();
   const [nameError, setNameError] = useState("");
   const formRef = useRef();
-  if (!isContentManager()) {
-    history.replace(HOMEPAGE);
-  }
+  useEffect(() => {
+    if (!isContentManager()) {
+      history.replace(HOMEPAGE);
+    }
+  });
   function submitForm(event) {
     event.preventDefault();
-    const formData = new FormData(formRef.current);
-    addProduct(formData)
+    const productData = new FormData(formRef.current);
+    addProduct(productData)
       .then((data) => {
         alert("product created.");
       })
@@ -30,13 +33,13 @@ export function AddProduct() {
   }
   return (
     <div
-      className="form-container"
+      className="product-form-container"
       style={{ background: "url(/background_banner.jpg)" }}
     >
-      <div className="title-field">Add Product</div>
+      <h1 className="title-field">Add Product</h1>
       <form className="product-form" onSubmit={submitForm} ref={formRef}>
-        <div className="form-row">
-          <div className="field-name">Name:</div>
+        <div className="product-form-row">
+          <div className="product-form-field-name">Name:</div>
           <input
             className="input-product-field"
             name="name"
@@ -47,8 +50,8 @@ export function AddProduct() {
         {nameError && (
           <ErrorField text={nameError} style={{ fontSize: "25px" }} />
         )}
-        <div className="form-row">
-          <div className="field-name">Quantity:</div>
+        <div className="product-form-row">
+          <div className="product-form-field-name">Quantity:</div>
           <input
             required
             defaultValue="1"
@@ -59,8 +62,8 @@ export function AddProduct() {
             min="1"
           />
         </div>
-        <div className="form-row">
-          <div className="field-name">Price:</div>
+        <div className="product-form-row">
+          <div className="product-form-field-name">Price:</div>
           <input
             required
             defaultValue="1"
@@ -71,19 +74,19 @@ export function AddProduct() {
             min="1"
           />
         </div>
-        <div className="form-row">
-          <div className="field-name">Description:</div>
+        <div className="product-form-row">
+          <div className="product-form-field-name">Description:</div>
           <textarea
             className="input-product-field"
             name="description"
             placeholder="Enter Description"
           />
         </div>
-        <div className="form-row">
-          <div className="field-name">Image:</div>
+        <div className="product-form-row">
+          <div className="product-form-field-name">Image:</div>
           <input className="file-field" name="image" type="file" />
         </div>
-        <button type="submit" className="button">
+        <button type="submit" className="product-form-btn">
           Submit
         </button>
       </form>
