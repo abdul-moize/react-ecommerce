@@ -1,7 +1,7 @@
 export const HOMEPAGE = "/products/";
 export const AUTH = "/";
 
-const DOMAIN = process.env.REACT_APP_API_DOMAIN;
+export const DOMAIN = process.env.REACT_APP_API_DOMAIN;
 export const CART_API = `${DOMAIN}/carts/`;
 export const PRODUCT_API = `${DOMAIN}/products/api/`;
 export const LOGIN_API = `${DOMAIN}/users/login/`;
