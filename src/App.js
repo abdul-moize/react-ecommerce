@@ -8,6 +8,7 @@ import LoginOrRegister from "./pages/loginOrRegister";
 import LogOut from "./pages/logout";
 import { AddProduct } from "./pages/addProduct";
 import ProductDetail from "./pages/productDetail";
+import { Orders } from "./pages/orders";
 require("dotenv").config();
 
 function App() {
@@ -26,7 +27,9 @@ function App() {
           <AddProduct />
         </Route>
 
-        <Route path="/orders"></Route>
+        <Route path="/orders">
+          <Orders />
+        </Route>
 
         <Route path="/cart">
           <CartDetail />

@@ -10,11 +10,13 @@ export function AddProduct() {
   const history = useHistory();
   const [nameError, setNameError] = useState("");
   const formRef = useRef();
+
   useEffect(() => {
     if (!isContentManager()) {
       history.replace(HOMEPAGE);
     }
   }, [history]);
+
   function submitForm(event) {
     event.preventDefault();
     const productData = new FormData(formRef.current);
