@@ -45,4 +45,4 @@ function RegisterForm(props) {
   );
 }
 
-export { RegisterForm };
+export default RegisterForm;

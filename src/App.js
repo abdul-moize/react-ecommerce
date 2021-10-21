@@ -6,10 +6,10 @@ import Header from "./components/header";
 import Homepage from "./pages/homepage";
 import LoginOrRegister from "./pages/loginOrRegister";
 import LogOut from "./pages/logout";
-import { AddProduct } from "./pages/addProduct";
+import AddProduct from "./pages/addProduct";
 import ProductDetail from "./pages/productDetail";
-import { Orders } from "./pages/orders";
-import { Profile } from "./pages/profile";
+import Orders from "./pages/orders";
+import Profile from "./pages/profile";
 require("dotenv").config();
 
 function App() {

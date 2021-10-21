@@ -1,12 +1,13 @@
 import React from "react";
+import { withRouter } from "react-router";
 import { SubmitButton } from "../../components/elements";
 import { AUTH } from "../../constants";
 import { getUserData, updateUserData } from "../../services/userService";
 import "./profile.css";
 
-export class Profile extends React.Component {
-  constructor() {
-    super();
+class Profile extends React.Component {
+  constructor(props) {
+    super(props);
 
     this.state = {
       name: "",
@@ -27,6 +28,7 @@ export class Profile extends React.Component {
 
   handleNameChange(event) {
     const newName = event.target.value;
+
     this.setState({
       name: newName,
       nameValid: this.state.valid && newName.trim() !== "",
@@ -36,6 +38,7 @@ export class Profile extends React.Component {
   handleEmailChange(event) {
     const newEmail = event.target.value;
     const emailRegex = /\w*@\w*.com\b/;
+
     this.setState({
       email: newEmail,
       emailValid: emailRegex.test(newEmail),
@@ -45,6 +48,7 @@ export class Profile extends React.Component {
   handlePasswordChange(event) {
     const newPassword = event.target.value;
     const passwordRegex = /[0-9]+[a-zA-z]+\w{6}|[a-zA-Z]+[0-9]+\w{6}/;
+
     this.setState({
       password: newPassword,
       passwordValid: passwordRegex.test(newPassword),
@@ -60,7 +64,8 @@ export class Profile extends React.Component {
         });
       })
       .catch((errorMessage) => {
-        //if (errorMessage === "You are not logged in") history.replace(AUTH);
+        if (errorMessage === "You are not logged in")
+          this.props.history.replace(AUTH);
       });
   }
 
@@ -130,3 +135,5 @@ export class Profile extends React.Component {
     );
   }
 }
+
+export default withRouter(Profile);

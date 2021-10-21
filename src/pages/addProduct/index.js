@@ -6,7 +6,7 @@ import { addProduct } from "../../services/productService";
 import { isContentManager } from "../../utils";
 import "./addProduct.css";
 
-export function AddProduct() {
+export default function AddProduct() {
   const history = useHistory();
   const [nameError, setNameError] = useState("");
   const formRef = useRef();

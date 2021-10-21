@@ -1,7 +1,7 @@
 import { DOMAIN } from "../../constants";
 import "./orderItem.css";
 
-export function OrderItem(props) {
+export default function OrderItem(props) {
   const order = props.order;
   const cartItems = props.cartItems;
   return (

@@ -3,7 +3,7 @@ import { AUTH } from "../../constants";
 import "./navLinks.css";
 import { isContentManager } from "../../utils";
 
-export function NavLinks(props) {
+export default function NavLinks(props) {
   return (
     <div className="header-right">
       {props.isLoggedIn ? (
