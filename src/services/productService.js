@@ -19,21 +19,17 @@ export function getProducts() {
     });
 }
 
-export async function addProduct(productData) {
+export function addProduct(productData) {
   return fetch(PRODUCT_API, {
     method: "POST",
     headers: {
       Authorization: `Token ${localStorage.getItem("token")}`,
     },
     body: productData,
-  })
-    .then((res) => {
-      return res.json().then((data) => [res, data]);
-    })
-    .then((data) => {
-      if (data[0].status === 200) return data[1];
-      throw data[1];
-    });
+  }).then(async (res) => {
+    if (res.status === 200) return res.json();
+    throw await res.json();
+  });
 }
 
 export function getProduct(id) {
