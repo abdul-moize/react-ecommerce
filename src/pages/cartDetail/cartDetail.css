@@ -1,0 +1,29 @@
+.cart-box{
+  width: 80%;
+  margin: 20px auto;
+  min-height: 300px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.cart-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  flex-direction: column;
+}
+
+.checkout-btn{
+  width: 200px;
+  border: 0;
+  border-radius: 20px;
+  font-size: 25px;
+  cursor: pointer;
+  height: 40px;
+  margin: 20px;
+  background: linear-gradient(to right, red, yellow);
+}

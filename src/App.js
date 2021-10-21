@@ -1,5 +1,6 @@
 import { Route, Switch } from "react-router";
 import { useState } from "react";
+import CartDetail from "./pages/cartDetail";
 import { AUTH, HOMEPAGE } from "./constants";
 import Header from "./components/header";
 import Homepage from "./pages/homepage";
@@ -27,9 +28,9 @@ function App() {
 
         <Route path="/orders"></Route>
 
-        {/* <Route path="/cart">
+        <Route path="/cart">
           <CartDetail />
-        </Route> */}
+        </Route>
 
         <Route path="/logout">
           <LogOut setLoggedIn={setLoggedIn} />
