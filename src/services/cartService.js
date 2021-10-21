@@ -42,9 +42,6 @@ export function deleteCartItem(id) {
       if (res.status === 200) return res.json();
       throw new NoCartItemsException("Invalid Id");
     })
-    .then((data) => {
-      return data;
-    })
     .catch((reason) => alert(reason));
 }
 
