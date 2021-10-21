@@ -10,9 +10,7 @@ export function Orders() {
       .then((data) => {
         setOrders(data);
       })
-      .catch((errorMessage) => {
-        console.log(errorMessage);
-      });
+      .catch((errorMessage) => {});
   }, []);
   return (
     <div className="orders-box">

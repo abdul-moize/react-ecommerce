@@ -24,12 +24,8 @@ export function AddProduct() {
       .then((data) => {
         alert("product created.");
       })
-      .catch((errorPromise) => {
-        errorPromise.then((errors) => {
-          if (errors.name) {
-            setNameError(errors.name[0]);
-          }
-        });
+      .catch((errors) => {
+        setNameError(errors.name[0]);
       });
   }
   return (

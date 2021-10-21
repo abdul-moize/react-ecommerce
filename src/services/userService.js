@@ -1,6 +1,15 @@
-import { LOGIN_API, REGISTER_API } from "../constants";
+import { LOGIN_API, USER_API } from "../constants";
+import { ServerException } from "./cartService";
 
 function AuthenticationException(message) {
+  this.message = message;
+}
+
+function NotLoggedInException(message) {
+  this.message = message;
+}
+
+function InvalidCredentialsException(message) {
   this.message = message;
 }
 
@@ -24,7 +33,7 @@ export const loginService = (loginCredential) => {
 };
 
 export const registerService = (userData) => {
-  return fetch(REGISTER_API, {
+  return fetch(USER_API, {
     method: "POST",
     body: userData,
   })
@@ -43,4 +52,36 @@ export const registerService = (userData) => {
 export const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("role");
+};
+
+export const getUserData = () => {
+  return fetch(USER_API, {
+    headers: {
+      Authorization: `Token ${localStorage.getItem("token")}`,
+    },
+  })
+    .then((res) => {
+      if (res.status === 200) return res.json();
+      throw new NotLoggedInException("You are not logged in");
+    })
+    .catch((exception) => {
+      throw exception.message;
+    });
+};
+
+export const updateUserData = (userData) => {
+  return fetch(USER_API, {
+    method: "PATCH",
+    headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+    body: userData,
+  })
+    .then((res) => {
+      if (res.status === 200) return res.json();
+      if (res.status === 400)
+        throw new InvalidCredentialsException("Bad Request");
+      throw new ServerException("Server error. Please try again");
+    })
+    .catch((exception) => {
+      throw exception.message;
+    });
 };
