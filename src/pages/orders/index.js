@@ -11,12 +11,13 @@ export function Orders() {
         setOrders(data);
       })
       .catch((errorMessage) => {
+        
         console.log(errorMessage);
       });
   }, []);
   return (
     <div className="orders-box">
-      {orders ? (
+      {orders ?   (
         <>
           <h1 className="title-field">Orders</h1>
           {orders.map((order, index) => (
