@@ -13,7 +13,7 @@ function InvalidCredentialsException(message) {
   this.message = message;
 }
 
-export const loginService = (loginCredential) => {
+export const loginService = (loginCredential, userContext) => {
   return fetch(LOGIN_API, {
     method: "POST",
     body: loginCredential,
@@ -21,8 +21,7 @@ export const loginService = (loginCredential) => {
     .then((response) => response.json())
     .then((data) => {
       if (data["status_code"] === 200) {
-        localStorage.setItem("token", data["token"]);
-        localStorage.setItem("role", data["role"]);
+        userContext.setUserContext(data);
         return data;
       }
       throw new AuthenticationException("Wrong email or password");
@@ -49,15 +48,14 @@ export const registerService = (userData) => {
     });
 };
 
-export const logout = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("role");
+export const logout = (userContext) => {
+  userContext.clearUserContext();
 };
 
-export const getUserData = () => {
+export const getUserData = (userToken) => {
   return fetch(USER_API, {
     headers: {
-      Authorization: `Token ${localStorage.getItem("token")}`,
+      Authorization: `Token ${userToken}`,
     },
   })
     .then((res) => {
@@ -69,11 +67,11 @@ export const getUserData = () => {
     });
 };
 
-export const updateUserData = (userData) => {
+export const updateUserData = (userData, userToken) => {
   return fetch(USER_API, {
     method: "PATCH",
     headers: {
-      Authorization: `Token ${localStorage.getItem("token")}`,
+      Authorization: `Token ${userToken}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(userData),

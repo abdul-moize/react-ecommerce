@@ -1,24 +1,18 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useContext } from "react";
 import { addToCart } from "../../services/cartService";
 import { getProduct } from "../../services/productService";
+import { UserContext } from "../../store/userContext";
 import "./productDetail.css";
 
 function ProductDetail(props) {
-  const id = props.id;
+  const userToken = useContext(UserContext).user.token;
   const [productData, setProductData] = useState(null);
   const [quantity, setQuantity] = useState(0);
-  const formRef = useRef();
   const [errorMessage, setErrorMessage] = useState("Loading...");
-  function formSubmit(event) {
-    event.preventDefault();
-    const formData = new FormData(formRef.current);
-    addToCart(formData)
-      .then((data) => {
-        alert(data.message);
-        setQuantity(quantity - formData.get("quantity"));
-      })
-      .catch((errorMessage) => alert(errorMessage));
-  }
+  const formRef = useRef();
+
+  const id = props.id;
+
   useEffect(() => {
     getProduct(id)
       .then((data) => {
@@ -27,6 +21,18 @@ function ProductDetail(props) {
       })
       .catch((errors) => setErrorMessage(errors.message));
   }, [id]);
+
+  function formSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(formRef.current);
+    addToCart(formData, userToken)
+      .then((data) => {
+        alert(data.message);
+        setQuantity(quantity - formData.get("quantity"));
+      })
+      .catch((errorMessage) => alert(errorMessage));
+  }
+
   return (
     <div className="main-box">
       {productData ? (

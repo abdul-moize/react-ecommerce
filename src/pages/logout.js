@@ -1,17 +1,20 @@
 import { useHistory } from "react-router";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { AUTH } from "../constants";
 import { logout } from "../services/userService";
+import { UserContext } from "../store/userContext";
 
-function LogOut(props) {
+function LogOut() {
+  const userContext = useContext(UserContext);
+
   const history = useHistory();
-  const setLoggedIn = props.setLoggedIn;
+
   useEffect(() => {
-    logout();
+    logout(userContext);
     history.replace(AUTH);
-    setLoggedIn(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return <></>;
 }
 

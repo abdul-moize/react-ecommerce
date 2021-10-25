@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { loginService } from "../services/userService";
 import { HOMEPAGE } from "../constants";
@@ -8,18 +8,23 @@ import {
   PasswordField,
   SubmitButton,
 } from "./elements";
+import { UserContext } from "../store/userContext";
 
 function LoginForm(props) {
+  const userContext = useContext(UserContext);
+
   const history = useHistory();
+
   const formRef = useRef();
+
   const [errorMessage, setErrorMessage] = useState("");
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
     let formData = new FormData(formRef.current);
 
-    loginService(formData)
+    loginService(formData, userContext)
       .then((data) => {
-        props.setLoggedIn(true);
         history.replace(HOMEPAGE);
       })
       .catch((error) => {

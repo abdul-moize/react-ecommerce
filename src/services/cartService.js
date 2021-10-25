@@ -16,10 +16,10 @@ function NoOrdersException(message) {
   this.message = message;
 }
 
-export function getCartItems() {
+export function getCartItems(userToken) {
   return fetch(CART_API, {
     headers: {
-      Authorization: `Token ${localStorage.getItem("token")}`,
+      Authorization: `Token ${userToken}`,
     },
   })
     .then((response) => {
@@ -35,11 +35,11 @@ export function getCartItems() {
     });
 }
 
-export function deleteCartItem(id) {
+export function deleteCartItem(id, userToken) {
   return fetch(`${CART_API}${id}`, {
     method: "DELETE",
     headers: {
-      Authorization: `Token ${localStorage.getItem("token")}`,
+      Authorization: `Token ${userToken}`,
     },
   })
     .then((res) => {
@@ -49,12 +49,12 @@ export function deleteCartItem(id) {
     .catch((reason) => alert(reason));
 }
 
-export function updateCart(formData, checkout = "False") {
+export function updateCart(formData, userToken, checkout = "False") {
   formData.set("is_checkout", checkout);
   return fetch(UPDATE_CART_API, {
     method: "POST",
     headers: {
-      Authorization: `Token ${localStorage.getItem("token")}`,
+      Authorization: `Token ${userToken}`,
     },
     body: formData,
   })
@@ -67,11 +67,11 @@ export function updateCart(formData, checkout = "False") {
     });
 }
 
-export function addToCart(formData) {
+export function addToCart(formData, userToken) {
   return fetch(CART_API, {
     method: "POST",
     headers: {
-      Authorization: "Token " + localStorage.getItem("token"),
+      Authorization: `Token ${userToken}`,
     },
     body: formData,
   })
@@ -87,14 +87,14 @@ export function addToCart(formData) {
     });
 }
 
-export function checkoutCart(formData) {
-  return updateCart(formData, "True");
+export function checkoutCart(formData, userToken) {
+  return updateCart(formData, userToken, "True");
 }
 
-export function getOrders() {
+export function getOrders(userToken) {
   return fetch(CART_API, {
     headers: {
-      Authorization: `Token ${localStorage.getItem("token")}`,
+      Authorization: `Token ${userToken}`,
     },
   })
     .then((res) => {

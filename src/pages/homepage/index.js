@@ -7,6 +7,7 @@ import ProductCard from "../../components/productCard";
 function Homepage() {
   const [availableProducts, setAvailableProducts] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+
   useEffect(() => {
     getProducts()
       .then((products) => {
@@ -16,6 +17,7 @@ function Homepage() {
         setErrorMessage(errorMsg);
       });
   }, []);
+
   return (
     <div className="main-container">
       <img src="/homepage_banner.png" width="100%" alt="banner" />

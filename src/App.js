@@ -1,5 +1,4 @@
 import { Route, Switch } from "react-router";
-import { useState } from "react";
 import CartDetail from "./pages/cartDetail";
 import { AUTH, HOMEPAGE } from "./constants";
 import Header from "./components/header";
@@ -10,16 +9,16 @@ import AddProduct from "./pages/addProduct";
 import ProductDetail from "./pages/productDetail";
 import Orders from "./pages/orders";
 import Profile from "./pages/profile";
+import { UserContextProvider } from "./store/userContext";
 require("dotenv").config();
 
 function App() {
-  const [isLoggedIn, setLoggedIn] = useState(localStorage.getItem("token"));
   return (
-    <div>
-      <Header isLoggedIn={isLoggedIn} />
+    <UserContextProvider>
+      <Header />
       <Switch>
         <Route path={AUTH} exact>
-          <LoginOrRegister setLoggedIn={setLoggedIn} />
+          <LoginOrRegister />
         </Route>
         <Route path={HOMEPAGE} exact>
           <Homepage />
@@ -41,7 +40,7 @@ function App() {
         </Route>
 
         <Route path="/logout">
-          <LogOut setLoggedIn={setLoggedIn} />
+          <LogOut />
         </Route>
 
         <Route
@@ -52,7 +51,7 @@ function App() {
           )}
         />
       </Switch>
-    </div>
+    </UserContextProvider>
   );
 }
 
