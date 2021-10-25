@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { useState } from "react/cjs/react.development";
 import { ErrorField, SubmitButton } from "../../components/elements";
 import { AUTH } from "../../constants";
 import { getUserData, updateUserData } from "../../services/userService";
@@ -8,13 +7,25 @@ import "./profile.css";
 
 function Profile() {
   const history = useHistory();
-
   const [values, setValues] = useState({
     name: "",
     email: "",
     password: "",
   });
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    getUserData()
+      .then((userData) => {
+        setValues(() => ({
+          name: userData.name,
+          email: userData.email,
+        }));
+      })
+      .catch((errorMessage) => {
+        if (errorMessage === "You are not logged in") history.replace(AUTH);
+      });
+  }, [history]);
 
   const setValuesAndErrors = (newValues, newErrors) => {
     setValues(() => newValues);
@@ -54,27 +65,11 @@ function Profile() {
       { ...errors, password: passwordError }
     );
   };
-  useEffect(() => {
-    getUserData()
-      .then((userData) => {
-        setValues(() => ({
-          name: userData.name,
-          email: userData.email,
-        }));
-      })
-      .catch((errorMessage) => {
-        if (errorMessage === "You are not logged in") history.replace(AUTH);
-      });
-  }, [history]);
 
   const onSubmit = (event) => {
     event.preventDefault();
     if (!errors.name && !errors.email && !errors.password) {
-      const userData = new FormData();
-      for (let key in values) {
-        if (values[key] !== "") userData.append(key, values[key]);
-      }
-      updateUserData(userData)
+      updateUserData(values)
         .then((res) => alert(res.message))
         .catch((exception) => alert(exception));
     }

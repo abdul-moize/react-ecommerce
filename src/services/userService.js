@@ -72,8 +72,11 @@ export const getUserData = () => {
 export const updateUserData = (userData) => {
   return fetch(USER_API, {
     method: "PATCH",
-    headers: { Authorization: `Token ${localStorage.getItem("token")}` },
-    body: userData,
+    headers: {
+      Authorization: `Token ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
   })
     .then((res) => {
       if (res.status === 200) return res.json();
