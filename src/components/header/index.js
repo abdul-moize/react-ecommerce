@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { HOMEPAGE } from "../../constants";
-import { NavLinks } from "../navLinks";
+import NavLinks from "../navLinks";
 import "./header.css";
 
 function Header(props) {

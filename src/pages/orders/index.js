@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-import { OrderItem } from "../../components/orderItem";
+import OrderItem from "../../components/orderItem";
 import { getOrders } from "../../services/cartService";
 import "./orders.css";
 
-export function Orders() {
+export default function Orders() {
   const [orders, setOrders] = useState(null);
   useEffect(() => {
     getOrders()
       .then((data) => {
         setOrders(data);
       })
-      .catch((errorMessage) => {
-        console.log(errorMessage);
-      });
+      .catch((errorMessage) => {});
   }, []);
   return (
     <div className="orders-box">

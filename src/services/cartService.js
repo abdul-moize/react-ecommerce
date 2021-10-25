@@ -4,7 +4,7 @@ function OutOfStockException(message) {
   this.message = message;
 }
 
-function ServerException(message) {
+export function ServerException(message) {
   this.message = message;
 }
 

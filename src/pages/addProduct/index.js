@@ -6,7 +6,7 @@ import { addProduct } from "../../services/productService";
 import { isContentManager } from "../../utils";
 import "./addProduct.css";
 
-export function AddProduct() {
+export default function AddProduct() {
   const history = useHistory();
   const [nameError, setNameError] = useState("");
   const formRef = useRef();
@@ -24,12 +24,8 @@ export function AddProduct() {
       .then((data) => {
         alert("product created.");
       })
-      .catch((errorPromise) => {
-        errorPromise.then((errors) => {
-          if (errors.name) {
-            setNameError(errors.name[0]);
-          }
-        });
+      .catch((errors) => {
+        setNameError(errors.name[0]);
       });
   }
   return (

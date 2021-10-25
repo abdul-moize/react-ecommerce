@@ -26,9 +26,9 @@ export function addProduct(productData) {
       Authorization: `Token ${localStorage.getItem("token")}`,
     },
     body: productData,
-  }).then((res) => {
-    if (res.status === 201) return res.json();
-    throw res.json();
+  }).then(async (res) => {
+    if (res.status === 200) return res.json();
+    throw await res.json();
   });
 }
 

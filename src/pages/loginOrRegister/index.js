@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { LoginForm } from "../../components/loginForm";
-import { RegisterForm } from "../../components/registerForm";
+import LoginForm from "../../components/loginForm";
+import RegisterForm from "../../components/registerForm";
 import "./loginOrRegister.css";
 
 function LoginOrRegister(props) {

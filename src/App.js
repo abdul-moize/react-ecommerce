@@ -6,9 +6,10 @@ import Header from "./components/header";
 import Homepage from "./pages/homepage";
 import LoginOrRegister from "./pages/loginOrRegister";
 import LogOut from "./pages/logout";
-import { AddProduct } from "./pages/addProduct";
+import AddProduct from "./pages/addProduct";
 import ProductDetail from "./pages/productDetail";
-import { Orders } from "./pages/orders";
+import Orders from "./pages/orders";
+import Profile from "./pages/profile";
 require("dotenv").config();
 
 function App() {
@@ -30,6 +31,10 @@ function App() {
         <Route path="/orders">
           <Orders />
         </Route>
+        <Route path="/profile" exact>
+          <Profile />
+        </Route>
+        <Route path="/orders" exact></Route>
 
         <Route path="/cart">
           <CartDetail />
@@ -38,7 +43,7 @@ function App() {
         <Route path="/logout">
           <LogOut setLoggedIn={setLoggedIn} />
         </Route>
-        <Route path="profile"></Route>
+
         <Route
           path={`${HOMEPAGE}:product_id(\\d+)`}
           exact
