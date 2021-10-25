@@ -54,7 +54,7 @@ function Profile() {
   };
 
   const onPasswordChange = (event) => {
-    const passwordRegex = /[0-9]+[a-zA-z]+\w{6}|[a-zA-Z]+[0-9]+\w{6}/;
+    const passwordRegex = /[0-9]+[a-zA-z]+\w{6}|[a-zA-Z]\w{7}/;
 
     const newPassword = event.target.value;
     const passwordError =
