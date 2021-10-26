@@ -8,21 +8,21 @@ import { isContentManager } from "../../utils";
 import "./addProduct.css";
 
 export default function AddProduct() {
-  const user = useContext(UserContext).user;
+  const role = useContext(UserContext).user.role;
   const history = useHistory();
   const [nameError, setNameError] = useState("");
   const formRef = useRef();
 
   useEffect(() => {
-    if (!isContentManager(user.role)) {
+    if (!isContentManager(role)) {
       history.replace(HOMEPAGE);
     }
-  }, [history, user]);
+  }, [history, role]);
 
   function submitForm(event) {
     event.preventDefault();
     const productData = new FormData(formRef.current);
-    addProduct(productData, user.token)
+    addProduct(productData)
       .then((data) => {
         alert("product created.");
       })

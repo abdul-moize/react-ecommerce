@@ -1,11 +1,9 @@
-import { useRef, useEffect, useState, useContext } from "react";
+import { useRef, useEffect, useState } from "react";
 import { addToCart } from "../../services/cartService";
 import { getProduct } from "../../services/productService";
-import { UserContext } from "../../store/userContext";
 import "./productDetail.css";
 
 function ProductDetail(props) {
-  const userToken = useContext(UserContext).user.token;
   const [productData, setProductData] = useState(null);
   const [quantity, setQuantity] = useState(0);
   const [errorMessage, setErrorMessage] = useState("Loading...");
@@ -25,7 +23,7 @@ function ProductDetail(props) {
   function formSubmit(event) {
     event.preventDefault();
     const formData = new FormData(formRef.current);
-    addToCart(formData, userToken)
+    addToCart(formData)
       .then((data) => {
         alert(data.message);
         setQuantity(quantity - formData.get("quantity"));

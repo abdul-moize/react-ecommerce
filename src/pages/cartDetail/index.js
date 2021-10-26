@@ -1,6 +1,5 @@
 import { useRef, useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { useContext } from "react/cjs/react.development";
 import CartItem from "../../components/cartItem";
 import { ErrorField } from "../../components/elements";
 import { HOMEPAGE } from "../../constants";
@@ -10,20 +9,17 @@ import {
   updateCart,
   checkoutCart,
 } from "../../services/cartService";
-import { UserContext } from "../../store/userContext";
 import "./cartDetail.css";
 
 export default function CartDetail() {
   const [cartItems, setCartItems] = useState([]);
   const [errorMessage, setErrorMessage] = useState("Cart is Empty");
 
-  const userToken = useContext(UserContext).user.token;
-
   const formRef = useRef();
   const history = useHistory();
 
   const updateCartItems = () => {
-    getCartItems(userToken)
+    getCartItems()
       .then((cartItems) => {
         setCartItems(cartItems);
       })
@@ -36,12 +32,12 @@ export default function CartDetail() {
   const onChangeHandler = (event) => {
     const formData = new FormData(formRef.current);
     if (event.target.value !== "") {
-      updateCart(formData, userToken);
+      updateCart(formData);
     }
   };
 
   const onRemoveHandler = (id) => {
-    deleteCartItem(id, userToken).then(() => {
+    deleteCartItem(id).then(() => {
       updateCartItems();
     });
   };
@@ -49,7 +45,7 @@ export default function CartDetail() {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     const formData = new FormData(formRef.current);
-    checkoutCart(formData, userToken)
+    checkoutCart(formData)
       .then(() => {
         alert("Order Submitted Successfully");
         history.replace(HOMEPAGE);

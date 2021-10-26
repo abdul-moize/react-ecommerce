@@ -12,9 +12,9 @@ export const UserContext = createContext({
 
 export function UserContextProvider(props) {
   const [user, setUser] = useState({
-    name: sessionStorage.getItem("userName") || "",
-    role: sessionStorage.getItem("userRole") || "",
-    token: sessionStorage.getItem("userToken") || "",
+    name: localStorage.getItem("userName") || "",
+    role: localStorage.getItem("userRole") || "",
+    token: localStorage.getItem("userToken") || "",
   });
 
   function setUserContext(userData) {
@@ -23,9 +23,9 @@ export function UserContextProvider(props) {
       role: userData.role,
       token: userData.token,
     });
-    sessionStorage.setItem("userName", userData.name);
-    sessionStorage.setItem("userRole", userData.role);
-    sessionStorage.setItem("userToken", userData.token);
+    localStorage.setItem("userName", userData.name);
+    localStorage.setItem("userRole", userData.role);
+    localStorage.setItem("userToken", userData.token);
   }
 
   function clearUserContext() {

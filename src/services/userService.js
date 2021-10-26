@@ -13,17 +13,13 @@ function InvalidCredentialsException(message) {
   this.message = message;
 }
 
-export const loginService = (loginCredential, userContext) => {
+export const loginService = (loginCredential) => {
   return fetch(LOGIN_API, {
     method: "POST",
     body: loginCredential,
   })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data["status_code"] === 200) {
-        userContext.setUserContext(data);
-        return data;
-      }
+    .then((response) => {
+      if (response.status === 200) return response.json();
       throw new AuthenticationException("Wrong email or password");
     })
     .catch((error) => {
@@ -48,11 +44,9 @@ export const registerService = (userData) => {
     });
 };
 
-export const logout = (userContext) => {
-  userContext.clearUserContext();
-};
+export const getUserData = () => {
+  const userToken = localStorage.getItem("userToken");
 
-export const getUserData = (userToken) => {
   return fetch(USER_API, {
     headers: {
       Authorization: `Token ${userToken}`,
@@ -67,7 +61,9 @@ export const getUserData = (userToken) => {
     });
 };
 
-export const updateUserData = (userData, userToken) => {
+export const updateUserData = (userData) => {
+  const userToken = localStorage.getItem("userToken");
+
   return fetch(USER_API, {
     method: "PATCH",
     headers: {

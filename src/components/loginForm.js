@@ -10,9 +10,9 @@ import {
 } from "./elements";
 import { UserContext } from "../store/userContext";
 
-function LoginForm(props) {
+function LoginForm() {
   const userContext = useContext(UserContext);
-
+  console.log(userContext);
   const history = useHistory();
 
   const formRef = useRef();
@@ -23,8 +23,9 @@ function LoginForm(props) {
     event.preventDefault();
     let formData = new FormData(formRef.current);
 
-    loginService(formData, userContext)
+    loginService(formData)
       .then((data) => {
+        userContext.setUserContext(data);
         history.replace(HOMEPAGE);
       })
       .catch((error) => {

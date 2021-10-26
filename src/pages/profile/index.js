@@ -19,7 +19,7 @@ function Profile() {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    getUserData(userToken)
+    getUserData()
       .then((userData) => {
         setValues(() => ({
           name: userData.name,

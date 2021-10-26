@@ -16,7 +16,8 @@ function NoOrdersException(message) {
   this.message = message;
 }
 
-export function getCartItems(userToken) {
+export function getCartItems() {
+  const userToken = localStorage.getItem("userToken");
   return fetch(CART_API, {
     headers: {
       Authorization: `Token ${userToken}`,
@@ -35,7 +36,9 @@ export function getCartItems(userToken) {
     });
 }
 
-export function deleteCartItem(id, userToken) {
+export function deleteCartItem(id) {
+  const userToken = localStorage.getItem("userToken");
+
   return fetch(`${CART_API}${id}`, {
     method: "DELETE",
     headers: {
@@ -49,7 +52,9 @@ export function deleteCartItem(id, userToken) {
     .catch((reason) => alert(reason));
 }
 
-export function updateCart(formData, userToken, checkout = "False") {
+export function updateCart(formData, checkout = "False") {
+  const userToken = localStorage.getItem("userToken");
+
   formData.set("is_checkout", checkout);
   return fetch(UPDATE_CART_API, {
     method: "POST",
@@ -67,7 +72,9 @@ export function updateCart(formData, userToken, checkout = "False") {
     });
 }
 
-export function addToCart(formData, userToken) {
+export function addToCart(formData) {
+  const userToken = localStorage.getItem("userToken");
+
   return fetch(CART_API, {
     method: "POST",
     headers: {
@@ -87,11 +94,15 @@ export function addToCart(formData, userToken) {
     });
 }
 
-export function checkoutCart(formData, userToken) {
+export function checkoutCart(formData) {
+  const userToken = localStorage.getItem("userToken");
+
   return updateCart(formData, userToken, "True");
 }
 
-export function getOrders(userToken) {
+export function getOrders() {
+  const userToken = localStorage.getItem("userToken");
+
   return fetch(CART_API, {
     headers: {
       Authorization: `Token ${userToken}`,

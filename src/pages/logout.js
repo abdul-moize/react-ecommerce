@@ -1,7 +1,6 @@
 import { useHistory } from "react-router";
 import { useContext, useEffect } from "react";
 import { AUTH } from "../constants";
-import { logout } from "../services/userService";
 import { UserContext } from "../store/userContext";
 
 function LogOut() {
@@ -10,7 +9,7 @@ function LogOut() {
   const history = useHistory();
 
   useEffect(() => {
-    logout(userContext);
+    userContext.clearUserContext();
     history.replace(AUTH);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

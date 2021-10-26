@@ -19,7 +19,9 @@ export function getProducts() {
     });
 }
 
-export function addProduct(productData, userToken) {
+export function addProduct(productData) {
+  const userToken = localStorage.getItem("userToken");
+
   return fetch(PRODUCT_API, {
     method: "POST",
     headers: {
