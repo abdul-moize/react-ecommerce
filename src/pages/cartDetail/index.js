@@ -1,6 +1,5 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { useEffect, useState } from "react/cjs/react.development";
 import CartItem from "../../components/cartItem";
 import { ErrorField } from "../../components/elements";
 import { HOMEPAGE } from "../../constants";
@@ -15,8 +14,10 @@ import "./cartDetail.css";
 export default function CartDetail() {
   const [cartItems, setCartItems] = useState([]);
   const [errorMessage, setErrorMessage] = useState("Cart is Empty");
+
   const formRef = useRef();
   const history = useHistory();
+
   const updateCartItems = () => {
     getCartItems()
       .then((cartItems) => {
@@ -27,12 +28,14 @@ export default function CartDetail() {
         setErrorMessage(errors);
       });
   };
+
   const onChangeHandler = (event) => {
     const formData = new FormData(formRef.current);
     if (event.target.value !== "") {
       updateCart(formData);
     }
   };
+
   const onRemoveHandler = (id) => {
     deleteCartItem(id).then(() => {
       updateCartItems();
@@ -54,6 +57,7 @@ export default function CartDetail() {
 
   useEffect(() => {
     updateCartItems();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="cart-box">

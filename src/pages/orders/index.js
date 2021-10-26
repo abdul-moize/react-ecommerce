@@ -5,6 +5,7 @@ import "./orders.css";
 
 export default function Orders() {
   const [orders, setOrders] = useState(null);
+
   useEffect(() => {
     getOrders()
       .then((data) => {
@@ -12,6 +13,7 @@ export default function Orders() {
       })
       .catch((errorMessage) => {});
   }, []);
+
   return (
     <div className="orders-box">
       {orders ? (

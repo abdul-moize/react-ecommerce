@@ -18,13 +18,8 @@ export const loginService = (loginCredential) => {
     method: "POST",
     body: loginCredential,
   })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data["status_code"] === 200) {
-        localStorage.setItem("token", data["token"]);
-        localStorage.setItem("role", data["role"]);
-        return data;
-      }
+    .then((response) => {
+      if (response.status === 200) return response.json();
       throw new AuthenticationException("Wrong email or password");
     })
     .catch((error) => {
@@ -49,15 +44,12 @@ export const registerService = (userData) => {
     });
 };
 
-export const logout = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("role");
-};
-
 export const getUserData = () => {
+  const userToken = localStorage.getItem("userToken");
+
   return fetch(USER_API, {
     headers: {
-      Authorization: `Token ${localStorage.getItem("token")}`,
+      Authorization: `Token ${userToken}`,
     },
   })
     .then((res) => {
@@ -70,10 +62,12 @@ export const getUserData = () => {
 };
 
 export const updateUserData = (userData) => {
+  const userToken = localStorage.getItem("userToken");
+
   return fetch(USER_API, {
     method: "PATCH",
     headers: {
-      Authorization: `Token ${localStorage.getItem("token")}`,
+      Authorization: `Token ${userToken}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(userData),

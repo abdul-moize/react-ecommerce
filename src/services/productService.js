@@ -20,14 +20,16 @@ export function getProducts() {
 }
 
 export function addProduct(productData) {
+  const userToken = localStorage.getItem("userToken");
+
   return fetch(PRODUCT_API, {
     method: "POST",
     headers: {
-      Authorization: `Token ${localStorage.getItem("token")}`,
+      Authorization: `Token ${userToken}`,
     },
     body: productData,
   }).then(async (res) => {
-    if (res.status === 200) return res.json();
+    if (res.status === 201) return res.json();
     throw await res.json();
   });
 }

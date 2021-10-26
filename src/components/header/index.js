@@ -9,7 +9,7 @@ function Header(props) {
       <Link to={HOMEPAGE} className="logo">
         Django-Ecommerce
       </Link>
-      <NavLinks isLoggedIn={props.isLoggedIn} />
+      <NavLinks />
     </header>
   );
 }

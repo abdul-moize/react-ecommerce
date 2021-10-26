@@ -1,21 +1,23 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router";
 import { ErrorField } from "../../components/elements";
 import { HOMEPAGE } from "../../constants";
 import { addProduct } from "../../services/productService";
+import { UserContext } from "../../store/userContext";
 import { isContentManager } from "../../utils";
 import "./addProduct.css";
 
 export default function AddProduct() {
+  const role = useContext(UserContext).user.role;
   const history = useHistory();
   const [nameError, setNameError] = useState("");
   const formRef = useRef();
 
   useEffect(() => {
-    if (!isContentManager()) {
+    if (!isContentManager(role)) {
       history.replace(HOMEPAGE);
     }
-  }, [history]);
+  }, [history, role]);
 
   function submitForm(event) {
     event.preventDefault();

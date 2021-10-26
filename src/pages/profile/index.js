@@ -7,6 +7,7 @@ import "./profile.css";
 
 function Profile() {
   const history = useHistory();
+
   const [values, setValues] = useState({
     name: "",
     email: "",

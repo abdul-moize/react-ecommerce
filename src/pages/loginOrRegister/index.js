@@ -3,7 +3,7 @@ import LoginForm from "../../components/loginForm";
 import RegisterForm from "../../components/registerForm";
 import "./loginOrRegister.css";
 
-function LoginOrRegister(props) {
+function LoginOrRegister() {
   const [activeForm, setActiveForm] = useState("login");
   const [message, setMessage] = useState("");
 
@@ -34,7 +34,7 @@ function LoginOrRegister(props) {
         </div>
         {message && <div className="message">{message}</div>}
         {activeForm === "login" ? (
-          <LoginForm setLoggedIn={props.setLoggedIn} />
+          <LoginForm />
         ) : (
           <RegisterForm changePage={showLoginForm} setMessage={setMessage} />
         )}

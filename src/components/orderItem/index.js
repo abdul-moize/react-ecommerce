@@ -10,7 +10,7 @@ export default function OrderItem(props) {
       {cartItems.map((cartItem) => {
         const product = cartItem["product_data"];
         return (
-          <div className="order-cart-item">
+          <div className="order-cart-item" key={product.id}>
             <img
               className="order-product-image"
               src={

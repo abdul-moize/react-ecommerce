@@ -4,11 +4,22 @@ import { getProduct } from "../../services/productService";
 import "./productDetail.css";
 
 function ProductDetail(props) {
-  const id = props.id;
   const [productData, setProductData] = useState(null);
   const [quantity, setQuantity] = useState(0);
-  const formRef = useRef();
   const [errorMessage, setErrorMessage] = useState("Loading...");
+  const formRef = useRef();
+
+  const id = props.id;
+
+  useEffect(() => {
+    getProduct(id)
+      .then((data) => {
+        setProductData(data);
+        setQuantity(data.stock_quantity);
+      })
+      .catch((errors) => setErrorMessage(errors.message));
+  }, [id]);
+
   function formSubmit(event) {
     event.preventDefault();
     const formData = new FormData(formRef.current);
@@ -19,14 +30,7 @@ function ProductDetail(props) {
       })
       .catch((errorMessage) => alert(errorMessage));
   }
-  useEffect(() => {
-    getProduct(id)
-      .then((data) => {
-        setProductData(data);
-        setQuantity(data.stock_quantity);
-      })
-      .catch((errors) => setErrorMessage(errors.message));
-  }, [id]);
+
   return (
     <div className="main-box">
       {productData ? (
