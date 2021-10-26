@@ -17,7 +17,7 @@ export default function CartItem(props) {
       <input hidden defaultValue={product.id} name="product" />
       <input
         type="number"
-        className={styles.quantityField}
+        className={styles["quantity-field"]}
         min="1"
         name="quantity"
         max={product.stock_quantity}
