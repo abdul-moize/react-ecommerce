@@ -20,17 +20,7 @@
   border-radius: 4px;
 }
 
-.header a.logo {
-  font-size: 25px;
-  font-weight: bold;
-}
-
-.header a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.header a.active {
+.active {
   background-color: dodgerblue;
   color: white;
 }
