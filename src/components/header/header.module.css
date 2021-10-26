@@ -25,11 +25,6 @@
   color: black;
 }
 
-.header a.active {
-  background-color: dodgerblue;
-  color: white;
-}
-
 @media screen and (max-width: 500px) {
   .header a {
     float: none;

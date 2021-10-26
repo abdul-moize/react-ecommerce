@@ -12,7 +12,6 @@ import { UserContext } from "../store/userContext";
 
 function LoginForm() {
   const userContext = useContext(UserContext);
-  console.log(userContext);
   const history = useHistory();
 
   const formRef = useRef();
