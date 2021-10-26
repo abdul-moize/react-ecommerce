@@ -1,14 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { ErrorField, SubmitButton } from "../../components/elements";
 import { AUTH } from "../../constants";
 import { getUserData, updateUserData } from "../../services/userService";
-import { UserContext } from "../../store/userContext";
 import "./profile.css";
 
 function Profile() {
-  const userToken = useContext(UserContext).user.token;
-
   const history = useHistory();
 
   const [values, setValues] = useState({
@@ -29,7 +26,7 @@ function Profile() {
       .catch((errorMessage) => {
         if (errorMessage === "You are not logged in") history.replace(AUTH);
       });
-  }, [history, userToken]);
+  }, [history]);
 
   const setValuesAndErrors = (newValues, newErrors) => {
     setValues(() => newValues);
@@ -73,7 +70,7 @@ function Profile() {
   const onSubmit = (event) => {
     event.preventDefault();
     if (!errors.name && !errors.email && !errors.password) {
-      updateUserData(values, userToken)
+      updateUserData(values)
         .then((res) => alert(res.message))
         .catch((exception) => alert(exception));
     }

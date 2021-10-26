@@ -95,9 +95,7 @@ export function addToCart(formData) {
 }
 
 export function checkoutCart(formData) {
-  const userToken = localStorage.getItem("userToken");
-
-  return updateCart(formData, userToken, "True");
+  return updateCart(formData, "True");
 }
 
 export function getOrders() {
