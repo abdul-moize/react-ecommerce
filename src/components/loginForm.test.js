@@ -1,8 +1,11 @@
-import { screen, render, fireEvent } from "@testing-library/react";
+import { screen, render, fireEvent, act } from "@testing-library/react";
 import React from "react";
+import { HOMEPAGE } from "../constants";
 import LoginForm from "./loginForm";
 
 const userService = require("../services/userService");
+
+let loginService;
 
 let user = {
   email: "admin@admin.com",
@@ -11,17 +14,39 @@ let user = {
   role: "SA",
 };
 
+const mockReplace = jest.fn();
+
 jest.mock("react-router", () => ({
   useHistory: () => ({
-    replace: jest.fn(),
+    replace: mockReplace,
   }),
 }));
 
 describe("LoginForm", () => {
-  it("Should log a user in", () => {
+  beforeAll(() => {
+    loginService = jest
+      .spyOn(userService, "loginService")
+      .mockImplementation((userData) => {
+        if (
+          userData.get("email") === user.email &&
+          userData.get("password") === user.password
+        )
+          return Promise.resolve({
+            message: "Logged in sucessfully",
+          });
+        return Promise.reject("Wrong email or password");
+      });
+    mockReplace.mockClear();
+  });
+
+  afterAll(() => {
+    loginService.mockReset();
+    loginService.mockRestore();
+  });
+
+  it("Should log a user in", async () => {
     render(<LoginForm />);
 
-    const loginService = jest.spyOn(userService, "loginService");
     const [emailField, passwordField] = screen.getAllByPlaceholderText(
       /enter (email|password)/i
     );
@@ -29,22 +54,22 @@ describe("LoginForm", () => {
     fireEvent.change(passwordField, { target: { value: user.password } });
 
     const loginButton = screen.getByRole("button");
-    fireEvent.click(loginButton);
+
+    await act(async () => {
+      fireEvent.click(loginButton);
+    });
 
     const userData = new FormData();
     userData.append("email", user.email);
     userData.append("password", user.password);
 
     expect(loginService).toBeCalledWith(userData);
-
-    loginService.mockReset();
-    loginService.mockRestore();
+    expect(mockReplace).toBeCalledWith(HOMEPAGE);
   });
 
-  it("should not log in a user", () => {
+  it("should not log in a user", async () => {
     render(<LoginForm />);
 
-    const loginService = jest.spyOn(userService, "loginService");
     const [emailField, passwordField] = screen.getAllByPlaceholderText(
       /enter (email|password)/i
     );
@@ -52,15 +77,16 @@ describe("LoginForm", () => {
     fireEvent.change(passwordField, { target: { value: user.password } });
 
     const loginButton = screen.getByRole("button");
-    fireEvent.click(loginButton);
+
+    await act(async () => {
+      fireEvent.click(loginButton);
+    });
 
     const userData = new FormData();
     userData.append("email", "asd");
     userData.append("password", user.password);
 
     expect(loginService).toBeCalledWith(userData);
-
-    loginService.mockReset();
-    loginService.mockRestore();
+    expect(screen.getByText("Wrong email or password")).toBeInTheDocument();
   });
 });

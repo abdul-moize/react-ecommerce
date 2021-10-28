@@ -20,12 +20,8 @@ const renderHomepage = () => {
 };
 
 describe("Homepage", () => {
-  beforeEach(() => {
+  beforeAll(() => {
     jest.spyOn(productService, "getProducts").mockResolvedValue(products);
-  });
-
-  afterEach(() => {
-    jest.restoreAllMocks();
   });
 
   it("Asserts the products rendered are equal to products.length", async () => {
