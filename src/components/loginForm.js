@@ -24,8 +24,8 @@ function LoginForm() {
 
     loginService(formData)
       .then((data) => {
-        userContext.setUserContext(data);
         history.replace(HOMEPAGE);
+        userContext.setUserContext(data);
       })
       .catch((error) => {
         setErrorMessage(error);
